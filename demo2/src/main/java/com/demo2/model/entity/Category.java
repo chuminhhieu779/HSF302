@@ -19,6 +19,10 @@ public class Category {
     private BookType title ;
 
    // categories : the field name in java
-    @ManyToMany(mappedBy = "categories")
-    private Set<Book> books ;
+
+//    @ManyToMany(mappedBy = "categories")
+//    private Set<Book> books ;
+
+    @OneToMany(mappedBy = "category")
+    private Set<BookCategory> bookCategories;
 }

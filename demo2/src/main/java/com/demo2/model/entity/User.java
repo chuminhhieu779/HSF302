@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.lang.instrument.ClassDefinition;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -36,4 +37,6 @@ public class User {
     @OneToOne(mappedBy = "user")
     private UserProfile userProfile ;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Book> books;
 }

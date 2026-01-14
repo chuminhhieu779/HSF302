@@ -26,21 +26,31 @@ public class Book {
     private int quantity;
 
     // create relational table
-    @ManyToMany
-    @JoinTable(
-            // the name of relational table
-            name = "book_category",
-            // foreign key (book_id) references book(book_id)
-            joinColumns = @JoinColumn(
-                    name = "book_id",         // the name of FK column
-                    referencedColumnName = "id" // the name of PK column
-            ),
-            // foreign key ( category_id) references category(category_id)
-            inverseJoinColumns = @JoinColumn(
-                    name = "category_id",
-                    referencedColumnName = "id"
-            )
-    )
-    private Set<Category> categories;
+//    @ManyToMany
+//    @JoinTable(
+//            // the name of relational table
+//            name = "book_category",
+//            // foreign key (book_id) references book(book_id)
+//            joinColumns = @JoinColumn(
+//                    name = "book_id",         // the name of FK column
+//                    referencedColumnName = "id" // the name of PK column
+//            ),
+//            // foreign key ( category_id) references category(category_id)
+//            inverseJoinColumns = @JoinColumn(
+//                    name = "category_id",
+//                    referencedColumnName = "id"
+//            )
+//    )
+//      private Set<Category> categories;
 
+    @ManyToOne
+    @JoinColumn(
+            name = "users_id",
+            referencedColumnName = "id",
+            nullable = false
+    )
+    private User user ;
+
+    @OneToMany(mappedBy = "book")
+    private Set<BookCategory> bookCategories ;
 }
