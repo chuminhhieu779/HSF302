@@ -3,6 +3,8 @@ package com.suzune.demo3.model;
 import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 
+import java.util.List;
+
 @Table(name = "Users")
 @Entity
 public class User {
@@ -16,4 +18,6 @@ public class User {
     private String email ;
     @OneToOne(mappedBy = "user")
     private Profile profile ;
+    @ManyToMany(mappedBy = "user")
+    private List<Role> rolesList ;
 }
