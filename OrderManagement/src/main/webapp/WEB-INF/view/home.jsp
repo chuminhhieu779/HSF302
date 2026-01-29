@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/src/main/webapp/resource/css/home.css">
+    <title>Product Order Form</title>
+</head>
+
+<body>
+<main>
+    <div class="title">
+        <h1>Product Order Form</h1>
+        <p>Please fill all the required fields and select your desired product!</p>
+    </div>
+
+    <div class="content">
+        <form action="/submit-order" method="post">
+
+            <p>Full Name</p>
+            <div class="row">
+                <input type="text" name="firstName" placeholder="First" required/>
+                <input type="text" name="lastName" placeholder="Last" required/>
+            </div>
+
+            <p>Email</p>
+            <input type="email" name="email" placeholder="suzune@gmail.com" required/>
+
+            <p>Phone Number</p>
+            <input type="text" name="phone" placeholder="+84 123 456 789" required/>
+
+            <p>Shipping Address</p>
+            <input type="text" name="address1" placeholder="Address line 1" required/>
+            <input type="text" name="address2" placeholder="Address line 2"/>
+
+            <div class="row">
+                <input type="text" name="city" placeholder="City" required/>
+                <input type="text" name="region" placeholder="Region"/>
+            </div>
+
+            <div class="row">
+                <input type="text" name="code" placeholder="Postal / Zip Code" required/>
+                <select name="country" required>
+                    <option value="" disabled selected>Country</option>
+                    <option value="us">United States</option>
+                    <option value="ca">Canada</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="au">Australia</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">Add</button>
+                <button type="reset" class="cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>
