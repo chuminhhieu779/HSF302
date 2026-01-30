@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="/src/main/webapp/resource/css/home.css">
+    <link rel="stylesheet"  href="/home.css">
     <title>Product Order Form</title>
 </head>
 
@@ -15,7 +15,7 @@
     </div>
 
     <div class="content">
-        <form action="/submit-order" method="post">
+        <form action="/order/create" method="post">
 
             <p>Full Name</p>
             <div class="row">
@@ -27,7 +27,7 @@
             <input type="email" name="email" placeholder="suzune@gmail.com" required/>
 
             <p>Phone Number</p>
-            <input type="text" name="phone" placeholder="+84 123 456 789" required/>
+            <input type="text" name="phoneNumber" placeholder="+84 123 456 789" required/>
 
             <p>Shipping Address</p>
             <input type="text" name="address1" placeholder="Address line 1" required/>
@@ -54,6 +54,9 @@
                 <button type="reset" class="cancel">Cancel</button>
             </div>
         </form>
+    </div>
+    <div>
+        <!--        <p th:text="${notification}" > </p>-->
     </div>
 </main>
 </body>
