@@ -5,4 +5,5 @@ import com.assignment1.entity.Order;
 
 public interface OrderService {
     Order saveOrder(OrderCreationDTO dto);
+    long generateID();
 }

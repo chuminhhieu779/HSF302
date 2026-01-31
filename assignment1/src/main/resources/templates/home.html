@@ -15,37 +15,41 @@
     </div>
 
     <div class="content">
-        <form action="/order/create" method="post">
+
+        <form th:action="@{/order/create}" th:object="${orderCreationDTO}" method="post">
 
             <p>Full Name</p>
             <div class="row">
-                <input type="text" name="firstName" placeholder="First" required/>
-                <input type="text" name="lastName" placeholder="Last" required/>
+                <input type="text" th:field="*{firstName}" placeholder="First" required/>
+                <input type="text" th:field="*{lastName}" placeholder="Last" required/>
             </div>
 
             <p>Email</p>
-            <input type="email" name="email" placeholder="suzune@gmail.com" required/>
+            <input type="email" th:field="*{email}" placeholder="suzune@gmail.com" required/>
 
+            <div  th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}">
+            </div>
             <p>Phone Number</p>
-            <input type="text" name="phoneNumber" placeholder="+84 123 456 789" required/>
+            <input type="text" th:field="*{phoneNumber}" placeholder="123 456 789" required/>
 
             <p>Shipping Address</p>
-            <input type="text" name="address1" placeholder="Address line 1" required/>
-            <input type="text" name="address2" placeholder="Address line 2"/>
+            <input type="text" th:field="*{addressLine1}" placeholder="Address line 1" required/>
+            <input type="text" th:field="*{addressLine2}" placeholder="Address line 2" required/>
 
             <div class="row">
-                <input type="text" name="city" placeholder="City" required/>
-                <input type="text" name="region" placeholder="Region"/>
+                <input type="text" th:field="*{city}" placeholder="City" required/>
+                <input type="text" th:field="*{region}" placeholder="Region"/>
             </div>
 
             <div class="row">
-                <input type="text" name="code" placeholder="Postal / Zip Code" required/>
-                <select name="country" required>
+                <input type="text" th:field="*{postalCode}" placeholder="Postal / Zip Code" required/>
+                <select th:field="*{country}" required>
                     <option value="" disabled selected>Country</option>
-                    <option value="us">United States</option>
-                    <option value="ca">Canada</option>
-                    <option value="uk">United Kingdom</option>
-                    <option value="au">Australia</option>
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Australia">Australia</option>
                 </select>
             </div>
 
@@ -56,7 +60,7 @@
         </form>
     </div>
     <div>
-        <!--        <p th:text="${notification}" > </p>-->
+                <p th:text="${notification}" > </p>
     </div>
 </main>
 </body>

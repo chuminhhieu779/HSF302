@@ -1,16 +1,12 @@
 package com.assignment1.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +14,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "orders")
 public class Order {
     @Id
@@ -59,4 +58,20 @@ public class Order {
     @Column(name = "order_date",nullable = false, updatable = false)
     private LocalDateTime orderDate;
 
+    // allow to Hibernate ignores this field
+    @Transient
+    private long countID ;
+
+    public String createID(String prefix , long countID){
+        this.countID = countID ;
+        return  prefix + this.countID;
+    }
+
+    /**
+     * class this method before inserting data
+     */
+    @PrePersist
+    public void prePersistTime(){
+        this.orderDate = LocalDateTime.now();
+    }
 }

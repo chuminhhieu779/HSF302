@@ -4,40 +4,50 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
-public record OrderCreationDTO (
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+public class OrderCreationDTO {
+
         @NotBlank
-        @Size(min = 2 , max = 50)
-        @Pattern(regexp = "^[A-Za-z]+$")
-        String firstName,
+        @Size(min = 2, max = 50)
+        @Pattern(regexp = "^[\\p{L} ]+$")
+        private String firstName;
 
         @NotBlank
-        @Size(min = 2 , max = 50)
-        @Pattern(regexp = "^[A-Za-z]+$")
-        String lastName,
+        @Size(min = 2, max = 50)
+        @Pattern(regexp = "^[\\p{L} ]+$")
+        private String lastName;
 
+        @NotBlank
         @Email
-        @NotBlank
-        String email,
+        private String email;
 
         @NotBlank
-        @Pattern(regexp = "^\\+[0-9 ]{7,20}$")
-        String phoneNumber,
+        @Pattern(regexp = "^[0-9 ]{7,20}$")
+        private String phoneNumber;
 
         @NotBlank
-        String addressLine1,
-        @NotBlank
-        String addressLine2,
+        private String addressLine1;
 
         @NotBlank
-        String city,
-        String region,
+        private String addressLine2;
 
         @NotBlank
-        @Size(min = 3 , max = 10)
+        @Pattern(regexp = "^[\\p{L} ]+$")
+        private String city;
+
+        private String region;
+
+        @NotBlank
+        @Size(min = 3, max = 10)
         @Pattern(regexp = "^[A-Za-z0-9]+$")
-        String postalCode,
+        private String postalCode;
 
         @NotBlank
-        String country
-){}
+        private String country;
+}

@@ -8,18 +8,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrderMapper {
-    public Order toEntiy(OrderCreationDTO dto) {
+
+    public Order toEntity(OrderCreationDTO dto, long countID) {
         Order order = new Order();
-        order.setFirstName(dto.firstName());
-        order.setLastName(dto.lastName());
-        order.setEmail(dto.email());
-        order.setPhoneNumber(dto.phoneNumber());
-        order.setAddressLine1(dto.addressLine1());
-        order.setAddressLine2(dto.addressLine2());
-        order.setCity(dto.city());
-        order.setRegion(dto.region());
-        order.setPostalCode(dto.postalCode());
-        order.setCountry(dto.country());
-        return order ;
+        String id = order.createID("ORD00", countID);
+
+        Order order2 =  Order.builder()
+                .Id(id)
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
+                .email(dto.getEmail())
+                .phoneNumber(dto.getPhoneNumber())
+                .addressLine1(dto.getAddressLine1())
+                .addressLine2(dto.getAddressLine2())
+                .city(dto.getCity())
+                .region(dto.getRegion())
+                .postalCode(dto.getPostalCode())
+                .country(dto.getCountry())
+                .build();
+        return order2;
     }
 }
