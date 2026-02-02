@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/order_detail_view.css">
+    <title>Order Detail</title>
+</head>
+<body>
+<main>
+
+    <div class="title">
+        <h1>Order Detail List</h1>
+    </div>
+
+    <div class="content">
+        <table>
+            <thead>
+            <tr class="header">
+                <th>Order ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address 1</th>
+                <th>Address 2</th>
+                <th>City</th>
+                <th>Region</th>
+                <th>Postal Code</th>
+                <th>Country</th>
+                <th>Order Date</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="order : ${orderDetailList}">
+                <td th:text="${order.orderID}"></td>
+                <td th:text="${order.firstName}"></td>
+                <td th:text="${order.lastName}"></td>
+                <td th:text="${order.email}"></td>
+                <td th:text="${order.phoneNumber}"></td>
+                <td th:text="${order.addressLine1}"></td>
+                <td th:text="${order.addressLine2}"></td>
+                <td th:text="${order.city}"></td>
+                <td th:text="${order.region}"></td>
+                <td th:text="${order.postalCode}"></td>
+                <td th:text="${order.country}"></td>
+                <td th:text="${order.orderDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+</body>
+</html>

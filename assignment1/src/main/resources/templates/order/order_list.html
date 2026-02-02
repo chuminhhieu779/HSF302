@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/order_list_view.css">
+    <title>Document</title>
+</head>
+<body>
+<main>
+    <div class="title">
+        <h1>Order List</h1>
+    </div>
+    <div class="content">
+        <table>
+            <thead>
+            <tr class="header">
+                <th>OrderID</th>
+                <th>FullName</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>City</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order:${list}">
+                <td th:text="${order.orderId()}"></td>
+                <td th:text="${order.fullName()}"></td>
+                <td>
+                    <a th:href="@{/orders/{email}(email=${order.email()})}" th:text="${order.email()}">
+                    </a>
+                </td>
+                <td th:text="${order.address()}"></td>
+                <td th:text="${order.city()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>
