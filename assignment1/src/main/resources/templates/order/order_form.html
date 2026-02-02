@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet"  href="/home.css">
+    <link rel="stylesheet"  href="/css/home.css">
     <title>Product Order Form</title>
 </head>
 
@@ -16,7 +16,7 @@
 
     <div class="content">
 
-        <form th:action="@{/order/create}" th:object="${orderCreationDTO}" method="post">
+        <form th:action="@{/orders/create}" th:object="${orderRequestDTO}" method="post">
 
             <p>Full Name</p>
             <div class="row">
@@ -56,6 +56,9 @@
             <div class="buttons">
                 <button type="submit">Add</button>
                 <button type="reset" class="cancel">Cancel</button>
+                <button type="button" class="view-order-btn">
+                    <a href="/order/view-order-list">View Order List</a>
+                </button>
             </div>
         </form>
     </div>
