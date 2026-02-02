@@ -6,10 +6,11 @@ import com.assignment1.dto.response.OrderListResponseDTO;
 import com.assignment1.entity.Order;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderService {
     Order saveOrder(OrderRequestDTO dto);
     long generateID();
     List<OrderListResponseDTO> getALlOrder();
-    List<OrderDetailResponseDTO> getOrderDetailByEmail(String email);
+    OrderDetailResponseDTO getOrderDetailByEmail(String email);
 }

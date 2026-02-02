@@ -11,43 +11,42 @@ import lombok.*;
 @Setter
 @Getter
 public class OrderRequestDTO {
-
-        @NotBlank(message = "validation.name.null")
+        @NotBlank(message = "name must be not null")
         @Size(min = 2, max = 50)
-        @Pattern(message = "validation.name.invalid_format", regexp = "^[\\p{L} ]+$")
+        @Pattern(message = "name is invalid format", regexp = "^[\\p{L} ]+$")
         private String firstName;
 
-        @NotBlank(message = "validation.name.null")
+        @NotBlank(message = "name must be not null")
         @Size(min = 2, max = 50)
-        @Pattern(message = "validation.name.invalid_format", regexp = "^[\\p{L} ]+$")
+        @Pattern(message = "name is invalid format", regexp = "^[\\p{L} ]+$")
         private String lastName;
 
-        @NotBlank(message = "validation.email.null")
-        @Email(message = "validation.email.invalid_format")
+        @NotBlank(message = "email must be not null")
+        @Email(message = "email is invalid format")
         private String email;
 
-        @NotBlank(message = "validation.phoneNumber.null")
-        @Pattern(message = "validation.phoneNumber.invalid_format", regexp = "^[0-9 ]{7,20}$")
+        @NotBlank(message = "phone number must be not null")
+// Validates international phone number with country code
+        @Pattern(message = "phone number is invalid format", regexp = "^\\+[0-9]{1,3}(\\s[0-9]{3}){2,3}$")
         private String phoneNumber;
 
-        @NotBlank(message = "validation.address.null")
+        @NotBlank(message = "address must be not null")
         private String addressLine1;
 
-        @NotBlank(message = "validation.address.null")
         private String addressLine2;
 
-        @NotBlank(message = "validation.city.null")
-        @Pattern(message = "validation.city.invalid_format", regexp = "^[\\p{L} ]+$")
+        @NotBlank(message = "city must be not null")
+        @Pattern(message = "city is invalid format", regexp = "^[\\p{L} ]+$")
         private String city;
 
         private String region;
 
-        @NotBlank(message = "validation.postalCode.null")
+        @NotBlank(message = "postalCode must be not null")
         @Size(min = 3, max = 10)
-        @Pattern(message = "validation.postalCode.invalid_format", regexp = "^[A-Za-z0-9]+$")
+        @Pattern(message = "postalCode is invalid format", regexp = "^[A-Za-z0-9]+$")
         private String postalCode;
 
-        @NotBlank(message = "validation.country.null")
+        @NotBlank(message = "you have to choose country")
         private String country;
 
 }

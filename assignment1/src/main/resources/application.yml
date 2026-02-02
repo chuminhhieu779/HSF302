@@ -1,7 +1,4 @@
 spring:
-  messages:
-    basename: messages
-    encoding: UTF-8
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=OrderManagement;encrypt=true;trustServerCertificate=true
     username: ${DB_USERNAME}

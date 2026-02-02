@@ -46,7 +46,7 @@ public class OrderController {
             return "redirect:/orders/create";
         } catch (EmailAlreadyExisted e) {
             model.addAttribute("orderRequestDTO", dto);
-            bindingResult.rejectValue("email", e.getErrorCode().getCode(), e.getMessage());
+            model.addAttribute("emailError", "email already existed");
             return "order/order_form";
         }
     }
@@ -60,8 +60,8 @@ public class OrderController {
 
     @GetMapping("/{email}")
     public String viewOrderDetail2(@PathVariable String email, Model model){
-        List<OrderDetailResponseDTO> list = Collections.unmodifiableList(orderService.getOrderDetailByEmail(email));
-        model.addAttribute("orderDetailList", list);
+        OrderDetailResponseDTO dto = orderService.getOrderDetailByEmail(email);
+        model.addAttribute("orderDetail", dto);
         return "order/order_detail";
     }
 }

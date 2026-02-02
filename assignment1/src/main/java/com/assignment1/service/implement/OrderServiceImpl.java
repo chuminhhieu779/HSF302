@@ -1,19 +1,22 @@
-package com.assignment1.implement;
+package com.assignment1.service.implement;
 
 
 import com.assignment1.dto.request.OrderRequestDTO;
 import com.assignment1.dto.response.OrderDetailResponseDTO;
 import com.assignment1.dto.response.OrderListResponseDTO;
 import com.assignment1.entity.Order;
-import com.assignment1.enums.ErrorCode;
+
 import com.assignment1.exception.EmailAlreadyExisted;
+import com.assignment1.exception.EmailNotExistedException;
 import com.assignment1.mapper.OrderMapper;
 import com.assignment1.repository.OrderRepository;
 import com.assignment1.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import tools.jackson.databind.cfg.MapperBuilder;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository ;
     private final OrderMapper orderMapper ;
+    private final MapperBuilder mapperBuilder;
 
     @Override
     public long generateID() {
@@ -31,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order saveOrder(OrderRequestDTO dto) {
         if(orderRepository.existsOrderByEmail(dto.getEmail())){
-           throw new EmailAlreadyExisted(ErrorCode.EMAIL_ALREADY_EXISTED.getCode(), ErrorCode.EMAIL_ALREADY_EXISTED);
+           throw new EmailAlreadyExisted("email already existed!");
         }
         return orderRepository.save(orderMapper.toEntity(dto, generateID()));
     }
@@ -44,8 +48,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDetailResponseDTO> getOrderDetailByEmail(String email) {
-        return  orderRepository.findByEmail(email).stream()
-                .map(orderMapper::toOrderDetailResponse).toList();
+    public OrderDetailResponseDTO getOrderDetailByEmail(String email) {
+
+        return orderRepository.findByEmail(email)
+                .map(orderMapper::toOrderDetailResponse)
+                .orElseThrow(() -> new EmailNotExistedException("email not existed"));
+
     }
 }
