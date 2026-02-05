@@ -3,6 +3,8 @@ package com.assignment1.controller;
 
 import com.assignment1.dto.request.CustomerRequestDTO;
 import com.assignment1.dto.response.CityResponseDTO;
+import com.assignment1.dto.response.CustomerResponseDTO;
+import com.assignment1.dto.response.OrderListResponseDTO;
 import com.assignment1.exception.EmailAlreadyExisted;
 import com.assignment1.service.CityService;
 import com.assignment1.service.CustomerService;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -46,5 +49,11 @@ public class CustomerController {
             model.addAttribute("emailError", "email already existed");
             return "customer/customer_form";
         }
+    }
+    @GetMapping()
+    public String viewCustomerList(Model model) {
+        List<CustomerResponseDTO> list = Collections.unmodifiableList(customerService.findAllcustomer());
+        model.addAttribute("customerList", list);
+        return "customer/customer_list";
     }
 }

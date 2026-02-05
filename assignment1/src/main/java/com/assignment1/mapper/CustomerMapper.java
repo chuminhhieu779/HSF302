@@ -1,6 +1,7 @@
 package com.assignment1.mapper;
 
 import com.assignment1.dto.request.CustomerRequestDTO;
+import com.assignment1.dto.response.CustomerResponseDTO;
 import com.assignment1.entity.City;
 import com.assignment1.entity.Customer;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,17 @@ public class CustomerMapper {
                 .addressLine1(dto.getAddressLine1())
                 .addressLine2(dto.getAddressLine2())
                 .city(city)
+                .build();
+    }
+    public CustomerResponseDTO toResponse(Customer customer){
+        return CustomerResponseDTO.builder()
+                .firstName(customer.getFirstName())
+                .lastName(customer.getLastName())
+                .email(customer.getEmail())
+                .address1(customer.getAddressLine1())
+                .address2(customer.getAddressLine2())
+                .phoneNumber(customer.getPhoneNumber())
+                .city(customer.getCity().getName())
                 .build();
     }
 }
