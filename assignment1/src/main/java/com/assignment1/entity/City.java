@@ -29,12 +29,4 @@ public class City {
     @OneToMany(mappedBy = "city")
     private List<Customer> customerList ;
 
-    @Transient
-    private long countID ;
-
-    public String createID(String prefix , long countID){
-        this.countID = countID ;
-        return  prefix + this.countID;
-    }
-
 }

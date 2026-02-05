@@ -23,7 +23,7 @@
             </div>
 
             <form th:action="@{/customers/create}"
-                  th:object="${customerDTO}"
+                  th:object="${customerRequestDTO}"
                   method="post">
 
                 <!-- Full Name -->
@@ -103,20 +103,18 @@
 
                 <!-- City & Region -->
                 <div class="mb-3">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">City <span class="text-danger">*</span></label>
-                            <input type="text"
-                                   class="form-control"
-                                   th:field="*{city}"
-                                   th:classappend="${#fields.hasErrors('city')} ? 'is-invalid' : ''"
-                                   placeholder="City"
-                                   required/>
-                            <div class="invalid-feedback" th:if="${#fields.hasErrors('city')}"
-                                 th:errors="*{city}"></div>
-                        </div>
-                    </div>
+                    <label class="form-label fw-bold">
+                        City <span class="text-danger">*</span>
+                    </label>
+
+                    <select class="form-select">
+                        <option value="">-- Select city --</option>
+                        <option th:each="city : ${cityList}"
+                                th:text="${city.name}">
+                        </option>
+                    </select>
                 </div>
+
                 <!-- Buttons -->
                 <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
                     <button type="submit" class="btn btn-primary btn-lg px-5">create</button>
