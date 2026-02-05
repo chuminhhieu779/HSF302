@@ -2,7 +2,7 @@ package com.assignment1.exception;
 
 
 
-public abstract class BusinessException extends AppException{
+public abstract class BusinessException extends RuntimeException {
     public BusinessException(String message) {
         super(message);
     }

@@ -1,10 +1,16 @@
 package com.assignment1.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Table(name = "customer")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Customer {
     @Id
@@ -33,4 +39,13 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orderList ;
+
+    @Transient
+    private long countID ;
+
+    public String createID(String prefix , long countID){
+        this.countID = countID ;
+        return  prefix + this.countID;
+    }
+
 }

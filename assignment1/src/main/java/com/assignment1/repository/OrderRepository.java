@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface OrderRepository extends CrudRepository<Order, String> {
-
-    boolean existsOrderByEmail(String email);
-     List<Order> findAll();
-
-    Optional<Order> findByEmail(String email);
+//
+//    boolean existsOrderByEmail(String email);
+//     List<Order> findAll();
+//    String findIdByEmail(String email);
+//    Optional<Order> findByEmail(String email);
 }

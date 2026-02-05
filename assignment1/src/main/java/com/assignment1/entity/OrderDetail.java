@@ -2,6 +2,7 @@ package com.assignment1.entity;
 
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Table(
         name = "order_detail" ,
@@ -12,6 +13,11 @@ import jakarta.persistence.*;
         }
 )
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class OrderDetail {
 
     @Id
@@ -28,4 +34,13 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false) // natural key
     Product product ;
+
+    @Transient
+    private long countID ;
+
+    public String createID(String prefix , long countID){
+        this.countID = countID ;
+        return  prefix + this.countID;
+    }
+
 }
