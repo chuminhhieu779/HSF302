@@ -16,7 +16,6 @@ public class BookMapper {
                         .bookTitle(entity.getBookTitle())
                         .publishedYear(entity.getPublishedYear())
                         .publisherResponse(PublisherResponse.builder()
-                                .publisherName(entity.getPublisher().getPublisherName())
                                 .build()
                         ).build()
                 ).toList();
