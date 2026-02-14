@@ -13,6 +13,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+          CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
+          CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY }}
+          CLOUD_API_SECRET: ${{ secrets.CLOUD_API_SECRET }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,7 +33,6 @@ jobs:
           path: ~/.m2/repository
           key: maven-${{ hashFiles('demo4/pom.xml') }}
 
-      - name: Build demo4 project
-        run: |
-          cd demo4
-          mvn clean package -DskipTests
+      - name: Build demo4 project        
+        working-directory: demo4
+        run: mvn clean package -DskipTests      
