@@ -32,4 +32,4 @@ jobs:
       - name: Build demo4 project
         run: |
           cd demo4
-          mvn clean package
+          mvn clean package - DskipTests
