@@ -5,6 +5,7 @@ import com.assignment1.dto.request.CustomerRequestDTO;
 import com.assignment1.dto.response.CityResponseDTO;
 import com.assignment1.dto.response.CustomerResponseDTO;
 import com.assignment1.dto.response.OrderListResponseDTO;
+import com.assignment1.entity.Customer;
 import com.assignment1.exception.EmailAlreadyExisted;
 import com.assignment1.service.CityService;
 import com.assignment1.service.CustomerService;
@@ -27,6 +28,7 @@ import java.util.List;
 public class CustomerController {
     private final CustomerService customerService ;
     private final CityService cityService ;
+
     @GetMapping("/create")
     public String creatCustomer(CustomerRequestDTO customerRequestDTO ,Model model) {
         model.addAttribute("customerRequestDTO", customerRequestDTO);
@@ -34,6 +36,7 @@ public class CustomerController {
         model.addAttribute("cityList", cityResponseDTOList);
         return "customer/customer_form";
     }
+
     @PostMapping("/create")
     public String createCustomer (@Valid CustomerRequestDTO customerRequestDTO , BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()) {
@@ -50,10 +53,21 @@ public class CustomerController {
             return "customer/customer_form";
         }
     }
+
     @GetMapping()
     public String viewCustomerList(Model model) {
         List<CustomerResponseDTO> list = Collections.unmodifiableList(customerService.findAllcustomer());
         model.addAttribute("customerList", list);
         return "customer/customer_list";
+    }
+
+    @GetMapping("/orderlist")
+    public String showCustomerOrderList(Model model) {
+
+        List<Customer> customers = customerService.getCustomersHasOrdered();
+
+        model.addAttribute("customers", customers);
+
+        return "customer/customer_order_list";
     }
 }

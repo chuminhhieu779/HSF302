@@ -12,4 +12,5 @@ public interface CustomerService {
      void saveCustomer(CustomerRequestDTO dto);
      Customer checkUserExist(String email);
      List<CustomerResponseDTO> findAllcustomer();
+     List<Customer> getCustomersHasOrdered();
 }

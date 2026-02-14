@@ -38,10 +38,9 @@ public class OrderMapper {
 //        return orderListResponseDTO ;
 //    }
 
-//    public OrderDetailResponseDTO toOrderDetailResponse( Order order){
+//    public OrderDetailResponseDTO toOrderDetailResponse(Order order){
 //        return OrderDetailResponseDTO.builder()
-//                .orderID(order.getId())
-//                .firstName(order.getFirstName())
+//                .firstName(order.ge)
 //                .lastName(order.getLastName())
 //                .email(order.getEmail())
 //                .phoneNumber(order.getPhoneNumber())

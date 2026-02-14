@@ -1,0 +1,25 @@
+spring:
+  cache:
+    type: caffeine
+    caffeine:
+      spec: expireAfterWrite=300s
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=demo5;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: 123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.SQLServerDialect
+  thymeleaf:
+    cache: false
+
+cloudinary:
+  cloud-name: ${CLOUD_NAME}
+  api-key: ${CLOUD_API_KEY}
+  api-secret: ${CLOUD_API_SECRET}
+

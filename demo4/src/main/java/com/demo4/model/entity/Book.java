@@ -13,7 +13,9 @@ import java.util.Set;
 @Entity
 @Getter
 @NoArgsConstructor
-
+@Setter
+@Builder
+@AllArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +33,10 @@ public class Book {
     @ManyToMany(mappedBy = "bookSet")
     private Set<Tag> tagList = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "publisher_id")
-    private Publisher publisher ;
+    @Column(name = "image_url" , nullable = false, length = 150)
+    private String imageUrl ;
+    @Column(name = "image_id" , nullable = false, length = 150)
+    private String imageId ;
 
     @Override
     public boolean equals(Object o) {

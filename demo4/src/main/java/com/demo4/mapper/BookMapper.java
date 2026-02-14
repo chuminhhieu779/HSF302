@@ -15,6 +15,7 @@ public class BookMapper {
                 .map(entity -> BookResponse.builder()
                         .bookTitle(entity.getBookTitle())
                         .publishedYear(entity.getPublishedYear())
+                        .imageUrl(entity.getImageUrl())
                         .publisherResponse(PublisherResponse.builder()
                                 .build()
                         ).build()

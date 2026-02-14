@@ -37,12 +37,13 @@ public class OrderController {
         return "redirect:/products";
     }
 
-    @GetMapping()
-    public String viewOrderList(Model model) {
-        List<OrderListResponseDTO> list = Collections.unmodifiableList(orderService.getALlOrder());
-        model.addAttribute("list", list);
-        return "order/order_list";
-    }
+
+//    @GetMapping()
+//    public String viewOrderList(Model model) {
+//        List<OrderListResponseDTO> list = Collections.unmodifiableList(orderService.getALlOrder());
+//        model.addAttribute("list", list);
+//        return "order/order_list";
+//    }
 
 
 }

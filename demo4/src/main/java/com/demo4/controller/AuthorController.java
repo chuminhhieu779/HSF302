@@ -2,6 +2,8 @@ package com.demo4.controller;
 
 import com.demo4.model.dto.response.AuthorResponse;
 import com.demo4.service.AuthorService;
+import com.demo4.service.BookService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthorController {
     private final AuthorService authorService ;
+    private final BookService bookService ;
+
+
     @GetMapping("/author/showAuthor")
     public String showAuthor(Model model ){
         List<AuthorResponse> list = authorService.getAllAuthor();

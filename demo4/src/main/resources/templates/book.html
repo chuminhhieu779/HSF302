@@ -19,4 +19,12 @@
             </tr>
         </table>
     </body>
+    <div>
+        <form th:action="@{/books/add}" method="post" enctype="multipart/form-data">
+            <input type="text" name="title">
+            <input type="number" name="published_year">
+            <input type="file" name="file">
+            <button type="submit">Add Book</button>
+        </form>
+    </div>
 </html>

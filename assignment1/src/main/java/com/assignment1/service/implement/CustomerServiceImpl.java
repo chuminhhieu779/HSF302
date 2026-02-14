@@ -45,4 +45,9 @@ public class  CustomerServiceImpl implements CustomerService {
                 .map(mapper::toResponse)
                 .toList();
     }
+
+    @Override
+    public List<Customer> getCustomersHasOrdered() {
+        return customerRepository.customerHasOrderedList();
+    }
 }
