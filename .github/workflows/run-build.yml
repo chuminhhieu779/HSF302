@@ -1,0 +1,35 @@
+name: Build demo4 CI
+on:
+  push:
+    branches: [ master, main ]
+    paths:
+      - 'demo4/**'
+
+  pull_request:
+    branches: [ master, main ]
+    paths:
+      - 'demo4/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Cache Maven Dependency
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: maven-${{ hashFiles('demo4/pom.xml') }}
+
+      - name: Build demo4 project
+        run: |
+          cd demo4
+          mvn clean package
