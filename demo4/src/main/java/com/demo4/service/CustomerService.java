@@ -13,9 +13,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Base64;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 @Service
 @RequiredArgsConstructor
@@ -82,6 +89,35 @@ public class CustomerService {
             return hex.toString();
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalStateException("MD5 algorithm not available", e);
+        }
+    }
+
+    public void executeCommandUntrusted(String command) {
+        try {
+            Runtime.getRuntime().exec(command);
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to execute command", e);
+        }
+    }
+
+    public Object evalUserScriptUntrusted(String script) {
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
+        if (engine == null) {
+            throw new IllegalStateException("No JavaScript engine available");
+        }
+        try {
+            return engine.eval(script);
+        } catch (ScriptException e) {
+            throw new IllegalStateException("Script execution failed", e);
+        }
+    }
+
+    public Object deserializeUntrusted(String payload) {
+        byte[] bytes = Base64.getDecoder().decode(payload);
+        try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes))) {
+            return ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new IllegalStateException("Deserialization failed", e);
         }
     }
 }

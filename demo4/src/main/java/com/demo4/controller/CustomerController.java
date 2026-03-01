@@ -70,4 +70,25 @@ public class CustomerController {
     public void testSnykOpenRedirect3(@RequestParam String url, HttpServletResponse response) throws IOException {
         response.sendRedirect(url);
     }
+
+    @GetMapping("/customer/snyk/command-injection")
+    @ResponseBody
+    public String testSnykCommandInjection(@RequestParam String cmd) {
+        customerService.executeCommandUntrusted(cmd);
+        return "Command executed (intentionally vulnerable for testing).";
+    }
+
+    @GetMapping("/customer/snyk/script-eval")
+    @ResponseBody
+    public String testSnykScriptEval(@RequestParam String expression) {
+        Object result = customerService.evalUserScriptUntrusted(expression);
+        return String.valueOf(result);
+    }
+
+    @GetMapping("/customer/snyk/deserialization")
+    @ResponseBody
+    public String testSnykDeserialization(@RequestParam String payload) {
+        Object result = customerService.deserializeUntrusted(payload);
+        return String.valueOf(result);
+    }
 }
