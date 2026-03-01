@@ -15,12 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookService {
 
-
-
-
-
     private final BookRepository bookRepository ;
     private final BookMapper bookMapper ;
+
     @Cacheable("books")
     public List<BookResponse> getBook(){
         return bookMapper.toBookResponse(bookRepository.findAll());
@@ -28,4 +25,6 @@ public class BookService {
     public void saveBook(Book book){
         bookRepository.save(book);
     }
+
+
 }

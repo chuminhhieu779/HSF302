@@ -1,8 +1,4 @@
 spring:
-  cache:
-    type: caffeine
-    caffeine:
-      spec: expireAfterWrite=300s
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=demo5;encrypt=true;trustServerCertificate=true
     username: sa
@@ -17,8 +13,12 @@ spring:
     database-platform: org.hibernate.dialect.SQLServerDialect
   thymeleaf:
     cache: false
+#  threads:
+#    virtual:
+#      enabled: true
 
 cloudinary:
+  use-hardcoded-test-config: false
   cloud-name: ${CLOUD_NAME}
   api-key: ${CLOUD_API_KEY}
   api-secret: ${CLOUD_API_SECRET}
