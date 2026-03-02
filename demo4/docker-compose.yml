@@ -1,0 +1,25 @@
+# Docker Compose spec version used by this file.
+version: "3.9"
+
+# Container definitions.
+services:
+  sql:
+    # Microsoft SQL Server 2022 image.
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    # Optional fixed name so the container is easy to find.
+    container_name: sql-server
+    environment:
+      # Must be Y to accept the SQL Server license.
+      ACCEPT_EULA: "Y"
+      # SA admin password (use a strong value; prefer .env in real usage).
+      SA_PASSWORD: "123"
+    ports:
+      # host:container port mapping for SQL Server.
+      - "1433:1433"
+    volumes:
+      # Persist database files in a Docker named volume.
+      - sql_data:/var/opt/mssql
+
+# Volume declarations used by services above.
+volumes:
+  sql_data:
