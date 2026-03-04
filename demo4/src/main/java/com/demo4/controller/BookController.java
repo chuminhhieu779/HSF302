@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -101,6 +104,61 @@ public class BookController {
 
         // response.sendRedirect(safeRedirectTarget(url));
         response.sendRedirect(url);
+    }
+
+    @GetMapping("/snyk/error-leak")
+    @ResponseBody
+    public String testErrorLeak(@RequestParam String input) {
+        try {
+            Integer.parseInt(input);
+            return "OK";
+        } catch (Exception e) {
+            // return "Internal error";
+            return "Internal error: " + e.getMessage();
+        }
+    }
+
+    @GetMapping("/snyk/insecure-random")
+    @ResponseBody
+    public String testInsecureRandom() {
+
+        // java.security.SecureRandom r = new java.security.SecureRandom();
+        java.util.Random r = new java.util.Random();
+        int otp = 100000 + r.nextInt(900000);
+        return String.valueOf(otp);
+    }
+
+    @GetMapping("/snyk/xss-new")
+    @ResponseBody
+    public String testXssNew(@RequestParam String q) {
+        // return "<h1>" + org.springframework.web.util.HtmlUtils.htmlEscape(q) + "</h1>";
+        return "<h1>" + q + "</h1>";
+    }
+
+    @GetMapping("/snyk/command-new")
+    @ResponseBody
+    public String testCommandInjectionNew(@RequestParam String cmd) {
+        // return "Endpoint disabled";
+        try {
+            Runtime.getRuntime().exec(cmd);
+            return "Command executed.";
+        } catch (IOException e) {
+            return "Command failed: " + e.getMessage();
+        }
+    }
+
+    @GetMapping("/snyk/deserialization-new")
+    @ResponseBody
+    public String testDeserializationNew(@RequestParam String payload) {
+        // return "Endpoint disabled";
+        try {
+            byte[] bytes = Base64.getDecoder().decode(payload);
+            try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes))) {
+                return String.valueOf(ois.readObject());
+            }
+        } catch (Exception e) {
+            return "Deserialize failed: " + e.getMessage();
+        }
     }
 
 
