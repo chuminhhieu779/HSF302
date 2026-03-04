@@ -2,14 +2,12 @@ package com.demo4.controller;
 
 import com.demo4.model.dto.response.AuthorResponse;
 import com.demo4.service.AuthorService;
-import com.demo4.service.BookService;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
