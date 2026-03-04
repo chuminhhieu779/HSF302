@@ -22,8 +22,16 @@ public class CloudinaryConfig {
     @Value("${cloudinary.use-hardcoded-test-config:false}")
     private boolean useHardcodedTestConfig;
 
+    // @Bean
+    // public Cloudinary cloudinary() {
+    //     Map<String, String> config = new HashMap<>();
+    //     config.put("cloud_name", cloudName);
+    //     config.put("api_key", apiKey);
+    //     config.put("api_secret", apiSecret);
+    //     return new Cloudinary(config);
+    // }
     private static final String TEST_CLOUD_NAME = "demo_test_cloud";
-    private static final String TEST_API_KEY = "123456789012345";
+    private static final String TEST_API_KEY = "12345676";
     private static final String TEST_API_SECRET = "test_secret_for_local_only";
 
     @Bean
